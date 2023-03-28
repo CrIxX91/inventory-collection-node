@@ -52,6 +52,11 @@ const crearUsuario = async(req,res= response)=>{
     
 }
 
+const checkToken = async(req,res= response)=>{
+    const {uid,name} = req;
+    const token = await genereJWT(uid,name);
+}
+
 const loginUsuario = async(req,res= response)=>{
 
     try {
@@ -105,18 +110,33 @@ const loginUsuario = async(req,res= response)=>{
 const revalidarToken = async (req,res= response) =>{
 
     const {uid,name} = req;
-    const token = await genereJWT(uid,name);
+    const accessToken = await getJWT(uid,name);
+    const data = 
+    {
+        accessToken,
+        username:uid
+    }
     
     res.json({
-        ok:true,
-        uid,
-        name,
-        token
+        success:true,
+        message:'Nuevo Token',
+        data
+    })
+}
+
+const getusername = async(req,res= response) =>{
+    const {uid,name} = req;
+
+    res.json({
+        success:true,
+        message:'User Data',
+        username:uid
     })
 }
 
 module.exports={
     crearUsuario,
     loginUsuario,
-    revalidarToken
+    revalidarToken,
+    getusername
 }
