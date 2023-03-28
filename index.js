@@ -13,6 +13,10 @@ app.use(express.json());
 app.use('/api/auth', require('./routes/auth'));
 app.use('/api/inventory', require('./routes/inventory'));
 
+app.get('/', (req,res)=>{
+    res.send('Init Page');
+})
+
 app.listen(process.env.PORT,()=>{
     console.log(`servidor corriendo en puerto ${process.env.PORT}`)
 })
