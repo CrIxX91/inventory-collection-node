@@ -3,7 +3,7 @@ const { check } = require('express-validator');
 const router = Router();
 
 const { fieldValidator } = require('../middlewares/field-validator');
-const { addItem} = require('../controllers/inventory');
+const { addItem,getCollection } = require('../controllers/inventory');
 
 router.post(
     '/add',
@@ -15,5 +15,7 @@ router.post(
         fieldValidator
     ],
     addItem);
+
+router.get('/collection',[],getCollection);
 
 module.exports = router;

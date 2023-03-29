@@ -8,7 +8,7 @@ const { addBrand,getBrands } = require('../controllers/brand');
 router.post(
     '/add',
     [
-        check('name',`the name it's mandatary`).not().isEmpty(),
+        check('name',`the name is mandatary`).not().isEmpty(),
         fieldValidator
     ],
     addBrand);

@@ -6,6 +6,7 @@ const addBrand = async(req,res= response)=>{
     
     try {
 
+        console.log(req.body);
         const { name } = req.body;
         let brand = await Brand.findOne({name});
     
@@ -50,7 +51,7 @@ const getBrands = async(req,res= response)=>{
                 status:400
             })
         }
-        
+
         brands.sort(function (a, b) {
             if (a.name < b.name) {
               return -1;
