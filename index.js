@@ -12,6 +12,7 @@ app.use(cors());
 app.use(express.json());
 app.use('/api/auth', require('./routes/auth'));
 app.use('/api/inventory', require('./routes/inventory'));
+app.use('/api/brand', require('./routes/brand'));
 
 app.get('/', (req,res)=>{
     res.send('Init Page');

@@ -3,7 +3,7 @@ const { validationResult } = require("express-validator");
 
 
 const fieldValidator =(req,res = response,next) =>{
-    console.log(req.body)
+    // console.log(req.body)
     const errors = validationResult(req);
     if(!errors.isEmpty()){
         return res.status(400).json({
