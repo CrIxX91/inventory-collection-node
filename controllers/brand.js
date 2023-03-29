@@ -42,6 +42,7 @@ const getBrands = async(req,res= response)=>{
 
     try {
         let brands = await Brand.find();
+        
         if(!brands){
             return res.status(400).json({
                 success:false,
@@ -49,10 +50,16 @@ const getBrands = async(req,res= response)=>{
                 status:400
             })
         }
-
-        // brand = new Brand(req.body);
-
-        // await brand.save();
+        
+        brands.sort(function (a, b) {
+            if (a.name < b.name) {
+              return -1;
+            }
+            if (a.name > b.name) {
+              return 1;
+            }
+            return 0;
+          });
 
         res.status(201).json({
             brands,
