@@ -5,7 +5,6 @@ const express = require('express');
 require('dotenv').config();
 const cors = require("cors");
 const { dbConection } = require('./database/config');
-const { pusher } = require('./puhser/pusherlib');
 // const { pusher } = require('./puhser/pusherlib');
 
 // const Item = require("./models/ItemModel");

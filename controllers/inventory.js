@@ -22,23 +22,26 @@ const addItem = async(req,res= response)=>{
 
         await item.save();
 
-        let figures = await Item.find();
-
-        if(figures.length>0){
-
-            figures.sort(function (a, b) {
-                if (a.name < b.name) {
-                  return -1;
-                }
-                if (a.name > b.name) {
-                  return 1;
-                }
-                return 0;
-              });
-        }
-        console.log('ready to send');
         
-        pusher.trigger("collector-app", "update-list", { collection: figures})
+        setInterval(async () => {
+            let figures = await Item.find();
+
+            if(figures.length>0){
+    
+                figures.sort(function (a, b) {
+                    if (a.name < b.name) {
+                      return -1;
+                    }
+                    if (a.name > b.name) {
+                      return 1;
+                    }
+                    return 0;
+                  });
+            }
+            
+            
+            pusher.trigger("collector-app", "update-list", { collection: figures})    
+        }, 1000);
 
 
         res.status(201).json({
