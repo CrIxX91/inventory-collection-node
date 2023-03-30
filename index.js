@@ -44,7 +44,7 @@ app.get('/', (req,res)=>{
 
 io.on('connection',(socket)=>{
     
-    console.log('connected',socket.id)
+    // console.log('connected',socket.id)
 
     // interval = setInterval(() => {
     //     Item.find().exec().then(
