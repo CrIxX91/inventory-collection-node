@@ -42,27 +42,46 @@ io.on('connection',(socket)=>{
     
     console.log('connected',socket.id)
 
-    interval = setInterval(() => {
-        Item.find().exec().then(
-            x =>{
+    // interval = setInterval(() => {
+    //     Item.find().exec().then(
+    //         x =>{
                 
-                x.sort(function (a, b) {
-                    if (a.name < b.name) {
-                      return -1;
-                    }
-                    if (a.name > b.name) {
-                      return 1;
-                    }
-                    return 0;
-                  });
-                socket.emit("Figures",x);
-                // console.log(x);
-            } 
-        );
-    }, 5000);
+    //             x.sort(function (a, b) {
+    //                 if (a.name < b.name) {
+    //                   return -1;
+    //                 }
+    //                 if (a.name > b.name) {
+    //                   return 1;
+    //                 }
+    //                 return 0;
+    //               });
+    //             socket.emit("UpdateList",x);
+    //             // console.log(x);
+    //         } 
+    //     );
+    // }, 5000);
     // socket.on('message',(msg)=>{
     //     console.log(msg);
     // })
+    socket.on("Figures", () => {
+        console.log('Figures',socket.id); // undefined
+        Item.find().exec().then(
+                    x =>{
+                        
+                        x.sort(function (a, b) {
+                            if (a.name < b.name) {
+                              return -1;
+                            }
+                            if (a.name > b.name) {
+                              return 1;
+                            }
+                            return 0;
+                          });
+                        //   console.log(x);
+                        socket.broadcast.emit("list",x);
+                    } 
+                );
+    });
 
     socket.on("disconnect", () => {
         console.log('disconnect',socket.id); // undefined
