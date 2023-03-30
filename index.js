@@ -12,8 +12,10 @@ const app = express();
 const server = http.createServer(app);
 const io = new Server(server,{
     cors:{
-        origin:'*'
-    }
+        origin:'*',
+        a
+    }, 
+    transports: ['websocket', 'polling', 'flashsocket']
 });
 
 dbConection();
@@ -25,6 +27,11 @@ app.use(express.json());
 app.use('/api/auth', require('./routes/auth'));
 app.use('/api/inventory', require('./routes/inventory'));
 app.use('/api/brand', require('./routes/brand'));
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+});
 
 // app.get('/', (req,res)=>{
 //     res.send('Init Page');
@@ -51,7 +58,7 @@ io.on('connection',(socket)=>{
                 // console.log(x);
             } 
         );
-    }, 1000);
+    }, 5000);
     // socket.on('message',(msg)=>{
     //     console.log(msg);
     // })
