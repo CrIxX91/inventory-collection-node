@@ -5,10 +5,14 @@ const express = require('express');
 require('dotenv').config();
 const cors = require("cors");
 const { dbConection } = require('./database/config');
+const { pusher } = require('./puhser/pusherlib');
+// const { pusher } = require('./puhser/pusherlib');
+
 // const Item = require("./models/ItemModel");
 
 
 const app = express();
+
 // const server = http.createServer(app,{
 //     pingTimeout: 60000
 //   });
@@ -49,11 +53,20 @@ app.use(express.json());
 app.use('/api/auth', require('./routes/auth'));
 app.use('/api/inventory', require('./routes/inventory'));
 app.use('/api/brand', require('./routes/brand'));
+// app.use('/api/pusher', require('./routes/pusher'));
 
+
+// const res = await pusher.get({ path: "/channels/collection-inventory-production" });
+// if (res.status === 200) {
+//   const body = await res.json();
+//   const channelInfo = body.channels;
+// }
 
 app.get('/', (req,res)=>{
     res.send('Init Page');
 });
+
+
 
 // io.on('connection',(socket)=>{
 //     socket.on("Figures", () => {
