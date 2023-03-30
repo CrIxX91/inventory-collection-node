@@ -22,13 +22,6 @@ const addItem = async(req,res= response)=>{
 
         await item.save();
 
-        res.status(201).json({
-            uid:item.id,
-            success:true,
-            message:'Item added',
-            status:201
-        });
-
 
         setInterval(async () => {
             let figures = await Item.find();
@@ -50,7 +43,12 @@ const addItem = async(req,res= response)=>{
             pusher.trigger("collector-app", "update-list", { collection: figures})    
         }, 2000);
 
-        
+        res.status(201).json({
+            uid:item.id,
+            success:true,
+            message:'Item added',
+            status:201
+        });
     } catch (error) {
         res.status(500).json({
             success:false,
