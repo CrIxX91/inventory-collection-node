@@ -9,7 +9,9 @@ const Item = require("./models/ItemModel");
 
 
 const app = express();
-const server = http.createServer(app);
+const server = http.createServer(app,{
+    pingTimeout: 60000
+  });
 const io = new Server(server,{
     cors:{
         origin:'*',
@@ -24,11 +26,11 @@ dbConection();
 app.use(express.static('public'));
 app.use(cors());
 
-app.use(function(req, res, next) {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    next();
-});
+// app.use(function(req, res, next) {
+//     res.header("Access-Control-Allow-Origin", "*");
+//     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+//     next();
+// });
 
 app.use(express.json());
 app.use('/api/auth', require('./routes/auth'));
