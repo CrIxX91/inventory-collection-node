@@ -22,19 +22,21 @@ dbConection();
 app.use(express.static('public'));
 app.use(cors());
 
-app.use(express.json());
-app.use('/api/auth', require('./routes/auth'));
-app.use('/api/inventory', require('./routes/inventory'));
-app.use('/api/brand', require('./routes/brand'));
 app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     next();
 });
 
-// app.get('/', (req,res)=>{
-//     res.send('Init Page');
-// });
+app.use(express.json());
+app.use('/api/auth', require('./routes/auth'));
+app.use('/api/inventory', require('./routes/inventory'));
+app.use('/api/brand', require('./routes/brand'));
+
+
+app.get('/', (req,res)=>{
+    res.send('Init Page');
+});
 
 io.on('connection',(socket)=>{
     
