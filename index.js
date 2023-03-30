@@ -16,15 +16,18 @@ const io = new Server(server,{
     cors:{
         origin:'*',
         credentials:true,
-        methods: ["GET", "POST"]
+        methods: ['GET','POST','DELETE','UPDATE','PUT','PATCH'],
+        allowedHeaders:'*'
     }, 
-    transports: ['websocket', 'polling', 'flashsocket']
+    transports: ['websocket', 'polling', 'flashsocket'],
+    
 });
 
 dbConection();
 
 app.use(express.static('public'));
 app.use(cors());
+// server.
 
 // app.use(function(req, res, next) {
 //     res.header("Access-Control-Allow-Origin", "*");
@@ -43,30 +46,6 @@ app.get('/', (req,res)=>{
 });
 
 io.on('connection',(socket)=>{
-    
-    // console.log('connected',socket.id)
-
-    // interval = setInterval(() => {
-    //     Item.find().exec().then(
-    //         x =>{
-                
-    //             x.sort(function (a, b) {
-    //                 if (a.name < b.name) {
-    //                   return -1;
-    //                 }
-    //                 if (a.name > b.name) {
-    //                   return 1;
-    //                 }
-    //                 return 0;
-    //               });
-    //             socket.emit("UpdateList",x);
-    //             // console.log(x);
-    //         } 
-    //     );
-    // }, 5000);
-    // socket.on('message',(msg)=>{
-    //     console.log(msg);
-    // })
     socket.on("Figures", () => {
         console.log('Figures',socket.id); // undefined
         Item.find().exec().then(
@@ -88,7 +67,7 @@ io.on('connection',(socket)=>{
     });
 
     socket.on("disconnect", () => {
-        console.log('disconnect',socket.id); // undefined
+        // console.log('disconnect',socket.id);
     });
 })
 
