@@ -1,7 +1,5 @@
 const express = require('express');
-// const app = express();
-// const http = require('http');
-// const { Server } = require("socket.io");
+const app = express();
 require('dotenv').config();
 const cors = require("cors");
 const { dbConection } = require('./database/config');
@@ -10,7 +8,7 @@ const { dbConection } = require('./database/config');
 // const Item = require("./models/ItemModel");
 
 
-const app = express();
+// const app = express();
 
 // const server = http.createServer(app,{
 //     pingTimeout: 60000
@@ -52,6 +50,7 @@ app.use(express.json());
 app.use('/api/auth', require('./routes/auth'));
 app.use('/api/inventory', require('./routes/inventory'));
 app.use('/api/brand', require('./routes/brand'));
+app.use('/api/test',require('./routes/test'))
 // app.use('/api/pusher', require('./routes/pusher'));
 
 
@@ -61,9 +60,16 @@ app.use('/api/brand', require('./routes/brand'));
 //   const channelInfo = body.channels;
 // }
 
-app.get('/', (req,res)=>{
-    res.send('Init Page');
-});
+// app.router.get('/api/test',[], (req,res)=>{
+
+//     setInterval(() => {
+//         res.status(200).json({
+//             success:true,
+//             message:'Test'
+//         });
+//     }, 1000);
+    
+// });
 
 
 

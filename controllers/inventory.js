@@ -6,9 +6,9 @@ const { pusher } = require('../puhser/pusherlib');
 const addItem = async(req,res= response)=>{
     
     try {
-        const {name} = req.body;
+        const {name,brand} = req.body;
         
-        let item = await Item.findOne({name});
+        let item = await Item.findOne({name,brand});
 
         if(item){
             return res.status(400).json({

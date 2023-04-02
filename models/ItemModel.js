@@ -18,6 +18,11 @@ const ItemSchema = Schema({
         type:Number,
         require:true
     },
+    thumbpath:{
+        name:{
+            type:String
+        }
+    }
 
 });
 
