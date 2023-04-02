@@ -19,11 +19,9 @@ const ItemSchema = Schema({
         require:true
     },
     thumbpath:{
-        name:{
-            type:String
-        }
-    }
-
+        type:String,
+    },
+    
 });
 
 

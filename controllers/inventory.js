@@ -1,12 +1,13 @@
 const { response } = require('express');
 const Item = require("../models/ItemModel");
-const { pusher } = require('../puhser/pusherlib');
+
 
 
 const addItem = async(req,res= response)=>{
     
     try {
         const {name,brand} = req.body;
+        console.log(req.body)
         
         let item = await Item.findOne({name,brand});
 
@@ -22,26 +23,7 @@ const addItem = async(req,res= response)=>{
 
         await item.save();
 
-
-        setInterval(async () => {
-            let figures = await Item.find();
-
-            if(figures.length>0){
-    
-                figures.sort(function (a, b) {
-                    if (a.name < b.name) {
-                      return -1;
-                    }
-                    if (a.name > b.name) {
-                      return 1;
-                    }
-                    return 0;
-                  });
-            }
-            
-            
-            pusher.trigger("collector-app", "update-list", { collection: figures})    
-        }, 2000);
+        console.log(item)
 
         res.status(201).json({
             uid:item.id,
