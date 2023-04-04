@@ -25,8 +25,8 @@ router.post(
     ],
     loginUsuario);
 
-router.get('/renew', jwtValidator ,revalidarToken);
+router.get('/refresh-token', jwtValidator ,revalidarToken);
 
-router.get('/info', jwtValidator ,getusername);
+router.get('/validate-token', jwtValidator ,getusername);
 
 module.exports = router;
