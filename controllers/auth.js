@@ -35,17 +35,19 @@ const crearUsuario = async(req,res= response)=>{
         // })
 
         res.status(201).json({
-            ok:true,
-            uid:user.id,
-            name:user.name,
+            success:true,
+            status:201,
+            user,
             token,
+            message:'New User',
             refreshtoken
         });
         
     } catch (error) {
         res.status(500).json({
-            ok:false,
-            msg:'Por favor hable con el administrador'
+            success:false,
+            status:500,
+            message:'Server Error'
         })
     }
     

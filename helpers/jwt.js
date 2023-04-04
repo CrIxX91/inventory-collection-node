@@ -6,7 +6,7 @@ const getJWT =( uid,name )=>{
         const payload ={uid,name};
 
         jwt.sign(payload,process.env.SECRET_JWT_SEED,{
-            expiresIn:'2m'
+            expiresIn:'1h'
         },(err,token)=>{
             if(err){
                 console.log(err);
