@@ -36,6 +36,7 @@ const { dbConection } = require('./database/config');
 
 dbConection();
 
+
 app.use(express.static('public'));
 app.use(cors());
 // server.
@@ -50,7 +51,8 @@ app.use(express.json());
 app.use('/api/auth', require('./routes/auth'));
 app.use('/api/inventory', require('./routes/inventory'));
 app.use('/api/brand', require('./routes/brand'));
-app.use('/api/test',require('./routes/test'))
+app.use('/api/test',require('./routes/test'));
+// app.use(cors());
 // app.use('/api/pusher', require('./routes/pusher'));
 
 
